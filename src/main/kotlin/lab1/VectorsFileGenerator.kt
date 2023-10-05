@@ -1,10 +1,12 @@
+package lab1
+
 import java.io.File
 import java.util.stream.Collectors
 import java.util.stream.IntStream
 import kotlin.streams.toList
 
 fun main() {
-    val path = "/home/rtashbulatov/IdeaProjects/utmn/src/main/kotlin/lab1.txt"
+    val path = getPathDependsOnOs()
 
     val vectors = listOf(
         generateRandomVector(100000, -10, 10),
