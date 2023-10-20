@@ -8,10 +8,14 @@ fun main() {
     val m = 1000
     val k = 1000
 
-    val a = lab2.createMatrix(n, m)
-    val b = lab2.createMatrix(m, k)
-    val time1 = measureTimeMillis { mul(a, b) }
-    val time2 = measureTimeMillis { parallelStreamMul(a, b) }
+    val a = createMatrix(n, m)
+    val b = createMatrix(m, k)
+    var res1: Array<IntArray>
+    var res2: Array<IntArray>
+    val time1 = measureTimeMillis { res1 = mul(a, b) }
+    val time2 = measureTimeMillis { res2 = parallelStreamMul(a, b) }
+
+    assert(equals(res1, res2))
     println(time1)
     println(time2)
 }
@@ -37,11 +41,11 @@ fun mul(a: Array<IntArray>, b: Array<IntArray>): Array<IntArray> {
 }
 
 fun parallelStreamMul(a: Array<IntArray>, b: Array<IntArray>): Array<IntArray> {
-    val res = createMatrix(a.size, b[0].size)
+    val res = createMatrix(a.size, b[0].size, true)
 
     IntStream.range(0, res.size * res[0].size).parallel().forEach {
-        val i = it % res[0].size
-        val j = it / res[0].size
+        val i = it / res[0].size
+        val j = it % res[0].size
         res[i][j] = mul(a, b, i, j)
     }
 
@@ -59,4 +63,17 @@ fun parallelMul(a: Array<IntArray>, b: Array<IntArray>, row: Int, col: Int): Int
         .parallel()
         .map { i -> a[row][i] * b[i][col] }
         .sum()
+}
+
+fun equals(a: Array<IntArray>, b: Array<IntArray>): Boolean {
+    return a.contentDeepEquals(b)
+}
+
+fun print(a: Array<IntArray>) {
+    a.forEach { row ->
+        row.forEach {
+            print("$it ")
+        }
+        println()
+    }
 }

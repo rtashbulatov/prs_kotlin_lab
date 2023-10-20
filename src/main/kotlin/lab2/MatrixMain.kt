@@ -84,8 +84,8 @@ fun blockMul(a: Array<IntArray>, b: Array<IntArray>, res: Array<IntArray>, threa
     val handledSize = threadIdx * blockSize
     val realBlockSize = (res.size * res[0].size - handledSize).coerceAtMost(blockSize)
     for (k in handledSize..<handledSize + realBlockSize) {
-        val i = k % res[0].size
-        val j = k / res[0].size
+        val i = k / res[0].size
+        val j = k % res[0].size
         res[i][j] = mul(a, b, i, j)
     }
 }
