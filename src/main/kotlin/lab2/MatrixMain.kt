@@ -30,7 +30,7 @@ fun main() {
 fun createMatrix(n: Int, m: Int, random: Random? = null): Array<IntArray> {
     return Array(n) {
         IntArray(m) {
-            random?.nextInt() ?: 0
+            random?.nextInt(4) ?: 0
         }
     }
 }
