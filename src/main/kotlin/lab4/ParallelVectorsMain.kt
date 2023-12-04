@@ -12,15 +12,14 @@ import kotlin.system.measureTimeMillis
 val rnd = Random(123)
 
 fun main() {
-    val size = 80000000
+    val size = 500000000
     val a = generateRandomVector(size)
     val b = generateRandomVector(size)
 
-    val threads = 4
+    val threads = 24
     val res0: Int
     val time0 = measureTimeMillis { res0 = dot(a, b) }
-    println(res0)
-    println(time0)
+    println("A ($time0 ms): $res0")
 
     val res1: Int
     val time1 = measureTimeMillis { res1 = parallelDot(a, b, threads) }
@@ -30,14 +29,10 @@ fun main() {
     val time2 = measureTimeMillis { res2 = synchronizedParallelDot(a, b, threads) }
     val res3: Int
     val time3 = measureTimeMillis { res3 = semaphoreParallelDot(a, b, threads) }
-    println(res1)
-    println(time1)
-    println(res2)
-    println(time2)
-    println(res3)
-    println(time3)
-    println(res4)
-    println(time4)
+    println("B ($time1 ms): $res1")
+    println("C ($time2 ms): $res2")
+    println("D ($time3 ms): $res3")
+    println("E ($time4 ms): $res4")
 }
 
 fun parallelDot(a: List<Int>, b: List<Int>, threads: Int): Int {
