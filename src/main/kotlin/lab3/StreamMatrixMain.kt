@@ -20,8 +20,8 @@ fun main() {
     assert(equals(res1, res2))
     println(time1)
     println(time2)
-    print(res1)
-    print(res2)
+//    print(res1)
+//    print(res2)
 }
 
 fun createMatrix(n: Int, m: Int, random: Random? = null): Array<IntArray> {

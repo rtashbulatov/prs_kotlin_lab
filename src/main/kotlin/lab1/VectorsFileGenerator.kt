@@ -9,8 +9,8 @@ fun main() {
     val path = getPathDependsOnOs()
 
     val vectors = listOf(
-        generateRandomVector(100000, -10, 10),
-        generateRandomVector(100000, -10, 10)
+        generateRandomVector(30000000, -10, 10),
+        generateRandomVector(30000000, -10, 10)
     )
 
     writeVectorsToFile(path, vectors)
